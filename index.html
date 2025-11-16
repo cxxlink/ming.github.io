@@ -3,16 +3,23 @@
 <head>
     <title>自定义音乐播放器</title>
     <style>
+        .fit-box {
+            width: fit-content; /* 宽度收缩以适应内容 */
+            background-color: white;
+            padding: 10px;
+            margin: 10px;
+        }
         .audio-player {
-            width: 300px;
-            margin: 20px auto;
+            width: 100%;
+            /*margin: 20px auto;*/
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             text-align: center;
         }
+
         button {
-            padding: 10px 15px;
+            padding: 10px 30px;
             margin: 5px;
             cursor: pointer;
             background-color: #04AA6D;
@@ -20,19 +27,75 @@
             border: none;
             border-radius: 5px;
         }
+
+        .css-carousel {
+            width: 100%;
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .css-carousel img {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            opacity: 0;
+            animation-name: fade;
+            animation-duration: 6s; /* 总动画时长 = 单张图片显示时间 * 图片数量 */
+            animation-iteration-count: infinite;
+            align-content: center;
+        }
+
+        /* 为每张图片设置不同的动画延迟，实现顺序播放 */
+        .css-carousel img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .css-carousel img:nth-child(2) {
+            animation-delay: 3s;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            /* 淡入 */
+            30% {
+                opacity: 1;
+            }
+            /* 保持显示 */
+            40% {
+                opacity: 0;
+            }
+            /* 淡出 */
+            100% {
+                opacity: 0;
+            }
+            /* 保持隐藏，直到下一轮 */
+        }
     </style>
 </head>
 <body>
-<div class="audio-player">
-    <h2>古月日天</h2>
-    <audio id="audioPlayer" controls>
-        <source src="BeforeYourLoveWasUnwritten.mp3" type="audio/mpeg">
-        您的浏览器不支持音频元素。
-    </audio>
-    <div>
-        <button onclick="playAudio()">播放</button>
-        <button onclick="pauseAudio()">暂停</button>
-        <button onclick="stopAudio()">停止</button>
+<div class="fit-box">
+    <div class="css-carousel">
+        <img src="1.jpg" alt="图片1">
+        <img src="2.jpg" alt="图片2">
+    </div>
+    <div class="audio-player">
+        <audio id="audioPlayer" controls>
+            <source src="before_you_love_was_unwritten.mp3" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
+        <div>
+            <button onclick="playAudio()">播放</button>
+            <button onclick="pauseAudio()">暂停</button>
+            <button onclick="stopAudio()">停止</button>
+        </div>
     </div>
 </div>
 
