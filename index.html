@@ -2,10 +2,55 @@
 <html>
 <head>
     <title>自定义音乐播放器</title>
+    <style>
+        .audio-player {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="audio-player">
     <h2>古月日天</h2>
+    <audio id="audioPlayer" controls>
+        <source src="BeforeYourLoveWasUnwritten.mp3" type="audio/mpeg">
+        您的浏览器不支持音频元素。
+    </audio>
+    <div>
+        <button onclick="playAudio()">播放</button>
+        <button onclick="pauseAudio()">暂停</button>
+        <button onclick="stopAudio()">停止</button>
+    </div>
 </div>
+
+<script>
+    var audio = document.getElementById("audioPlayer");
+
+    function playAudio() {
+        audio.play();
+    }
+
+    function pauseAudio() {
+        audio.pause();
+    }
+
+    function stopAudio() {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+</script>
 </body>
 </html>
